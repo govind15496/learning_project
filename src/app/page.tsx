@@ -1,8 +1,25 @@
-import Image from "next/image";
+"use client"
 
+import Image from "next/image";
+import {SomeContext} from "../context/MainContext"
+import { useContext, useState } from "react";
+import { IncrementBtn } from "./component/IncrementBtn";
 export default function Home() {
+  const [counter, setCounter] = useState(0)
+
+  
+  const addFunction = () => {
+    setCounter((counter) => counter + 1)
+  }
+  
+  
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+   <SomeContext value={{addFunction, counter, setCounter}}>
+    <div className="flex flex-col items-center justify-center ">
+    <p>{counter}</p>
+    <IncrementBtn />
+    </div>
+     {/* <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
@@ -98,6 +115,8 @@ export default function Home() {
           Go to nextjs.org →
         </a>
       </footer>
-    </div>
+    </div> */}
+   
+   </SomeContext>
   );
 }
